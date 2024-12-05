@@ -67,3 +67,24 @@ def retrieve_passwords():
     result_text.delete(1.0, tk.END)
     for password in passwords:
         result_text.insert(tk.END, password + "\n")
+        
+def format_text():
+    # Apply bold formatting for SSID and Password
+    result_text.tag_configure("bold", font=("Helvetica", 12, "bold"))
+    pos = '1.0'
+    while True:
+        pos = result_text.search("SSID:", pos, nocase=1, stopindex=tk.END)
+        if not pos:
+            break
+        end_pos = f"{pos} + {len('SSID:')}c"
+        result_text.tag_add("bold", pos, end_pos)
+        pos = end_pos
+
+    pos = '1.0'
+    while True:
+        pos = result_text.search("Password:", pos, nocase=1, stopindex=tk.END)
+        if not pos:
+            break
+        end_pos = f"{pos} + {len('Password:')}c"
+        result_text.tag_add("bold", pos, end_pos)
+        pos = end_pos
