@@ -88,3 +88,18 @@ def format_text():
         end_pos = f"{pos} + {len('Password:')}c"
         result_text.tag_add("bold", pos, end_pos)
         pos = end_pos
+        
+        
+# GUI Setup with ttkbootstrap
+root = ttk.Window(themename="darkly")  # Apply the dark theme
+root.title("Wi-Fi Password Retriever")
+
+# Create and place a button to trigger the retrieval
+retrieve_button = ttk.Button(root, text="Retrieve Wi-Fi Passwords", command=lambda: [retrieve_passwords(), root.after(100, format_text)], bootstyle="primary-outline")
+retrieve_button.pack(pady=10)
+
+# Create and place a text area to display the results
+result_text = scrolledtext.ScrolledText(root, wrap=tk.WORD, width=70, height=20, font=("Helvetica", 12))
+result_text.pack(pady=10)
+
+root.mainloop()
